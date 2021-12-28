@@ -1,3 +1,6 @@
+> generated from [tinchoabbate/damn-vulnerable-defi](https://github.com/tinchoabbate/damn-vulnerable-defi)
+> Hack implementations of DeFi in Ethereum
+
 ![](cover.png)
 
 **A set of challenges to hack implementations of DeFi in Ethereum.**
